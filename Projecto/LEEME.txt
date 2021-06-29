@@ -1,0 +1,44 @@
+ControlJuego.cs: 
+-	Implementado a modo de singleton e implementado en la camara, contiene el control y referencias a cualquier objeto necesario para estetica y mecanicas del juego.
+-	Contiene la referencia al Jugador (vehiculo de recreacion RV) para tener el control de la aparicion de recuerdos ; y, otra referencia al VanFader (control de desaparicion) (Jugador.cs).
+-	Contiene las configuraciones y contadores del juego:
+	-	RecuerdosCapturados: representa la Vida del jugador. Aumenta mediante el evento de colision entre el Jugador (RV) y un Recuerdo. Disminuye con el evento de colision del jugador (RV) con cualquier otro objeto (Aves, Enjambre, Gomas o el auto de la vieja). recuerdo previo simboliza el numero de recuerdo anterior a un evento de colision.
+	-	RecuerdosIniciales: usado para el reinicio de la escena
+	-	Tiempo de generacion: representa el tiempo de configuracion que debe pasar para poder generar un objeto colisionable. Tiempo actual: acumula los delta de Tiempo, Tiempo Siguiente: El tiempo del siguiente evento de generacion.
+	-	ProbabilidadGeneracionXYZ: representa la configuracion de la ponderacion del tipo de objeto a ser generado en un evento de generacion. AcumuladaXYZ: representa la ponderacion acumulada para hacer la comparacion de un numero aleatorio dentro de un rango. usado en la funcion Generar., las probabilidades son actualizadas para aumentar el nivel de dificultar mediante el metodo ActualizarPonderacion.
+	
+-	UIContador: Representa la refencia al contador de recuerdos de la interfaz de usuario (ControlContador.cs); especificamente para cambiar el texto.
+-	GeneradoresXYZ: Representa la lista de posibles puntos o rangos de generacion de un objeto colisionable (Generador.cs).
+-	// TODO: CAPTURABLE
+-	ColorCorrectionCurves: Referencia al componente que cambia la saturacion del ambiente en caso de fin de juegos. Usado en el metodo SaturationOff
+-	Referencias al los fondos de ambiente para control de los mismos en caso de fin de juego (BackGroundRenderer.cs).
+-	Contiene la enumarcion de tipo de prefabricado.
+
+	
+Generador.cs
+-	Componente que representa que el objeto puede generar un capturable.
+-	si el componente tiene un componente hijo del tipo Rango (Rango.cs) se calcula un punto aleatorio entre el generador y el objeto rango para la generacion; si no, el nuevo objeto se instanciara en la posicion del generador.
+
+
+Arrastrable.cs:
+-	Contiene el movimiento un de objetivo
+DraggableBehavior.cs:
+-	contiene los movimientos naturales de los objetos capturables (por el raton). 
+
+Jugador.cs
+-.	Contiene la accione en caso de colision.
+
+FadeUtility.cs:
+-	Componente Auxliar para la salida o entrada de objetos al ambiente mediante fading.
+
+Limite.cs:
+-	componente que representa un limite de movimiento. destruye cualquier capturable que se salga de pantalla.
+
+ManejadorClick:
+-	Maneja los eventos del raton, y en caso de capturar algun objetivo. actica el modo seguimiento y cuando deja de presionar el boton del raton, establece la nueva direccion de movimiento del objetivo.
+
+ScrollBackGround.cs:
+-	Contiene el proceso de movimiento de los ambientes.
+
+VanFader.cs:
+-	desvanece y remueve la instancia de los componentes visuales del RV.
